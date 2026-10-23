@@ -1,8 +1,5 @@
 using System;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
 
 [Serializable]
 public class HeadPosePayload
@@ -12,30 +9,34 @@ public class HeadPosePayload
     public float z;
     public float yaw;
     public float pitch;
-    public string mode;
     public double t;
 }
 
 public class PoseTracker : MonoBehaviour
 {
     [Header("Referenzen")]
-    public Transform hmdCamera;
-    public WebSocketClient networkClient;
+    [SerializeField] private Transform hmdCamera;
+    [SerializeField] private WebSocketClient networkClient;
 
     [Header("Tracking Parameter")]
-    public float maxRadius = 0.20f;
-    [Range(15, 90)] public float sendRateHz = 45f;
-
-    [Header("Status")]
-    public string currentMode = "pvsnet";
+    [Tooltip("Maximaler Bewegungsradius in Metern vor Artefakt-Bildung")]
+    [SerializeField] private float maxRadius = 0.20f;
+    [Range(15, 90)]
+    [SerializeField] private float sendRateHz = 60f;
 
     private Vector3 hmdOrigin;
     private bool isOriginSet = false;
-    private float lastSendTime = 0f;
+    private float sendInterval;
+    private float timer = 0f;
     private bool isSending = false;
 
     public float LastSentYaw { get; private set; }
     public float LastSentPitch { get; private set; }
+
+    void Awake()
+    {
+        sendInterval = 1f / sendRateHz;
+    }
 
     void Start()
     {
@@ -48,27 +49,12 @@ public class PoseTracker : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
-        SendPose();
-    }
-
-    private void HandleInput()
-    {
-#if ENABLE_INPUT_SYSTEM
-        var keyboard = Keyboard.current;
-        if (keyboard != null)
+        timer += Time.deltaTime;
+        if (timer >= sendInterval)
         {
-            if (keyboard.rKey.wasPressedThisFrame)
-            {
-                Recenter();
-            }
-            if (keyboard.spaceKey.wasPressedThisFrame)
-            {
-                currentMode = (currentMode == "pvsnet") ? "original" : "pvsnet";
-                Debug.Log($"<color=yellow>[PoseTracker]</color> Modus gewechselt: {currentMode}");
-            }
+            timer = 0f;
+            SendPose();
         }
-#endif
     }
 
     public void Recenter()
@@ -77,7 +63,6 @@ public class PoseTracker : MonoBehaviour
         {
             hmdOrigin = hmdCamera.position;
             isOriginSet = true;
-            Debug.Log("<color=cyan>[PoseTracker]</color> Tracking neu zentriert!");
         }
     }
 
@@ -86,15 +71,12 @@ public class PoseTracker : MonoBehaviour
         if (networkClient == null || !networkClient.IsConnected || hmdCamera == null || isSending)
             return;
 
-        if (Time.time - lastSendTime < (1f / sendRateHz))
-            return;
-
-        lastSendTime = Time.time;
         isSending = true;
 
         try
         {
-            if (!isOriginSet) Recenter();
+            if (!isOriginSet)
+                Recenter();
 
             Vector3 offset = hmdCamera.position - hmdOrigin;
             Vector3 clamped = Vector3.ClampMagnitude(offset, maxRadius);
@@ -109,12 +91,15 @@ public class PoseTracker : MonoBehaviour
                 z = clamped.z,
                 yaw = LastSentYaw,
                 pitch = LastSentPitch,
-                mode = currentMode,
                 t = (DateTime.UtcNow - DateTime.UnixEpoch).TotalMilliseconds
             };
 
             string json = JsonUtility.ToJson(payload);
             await networkClient.SendTextAsync(json);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[PoseTracker] Sendefehler: {ex.Message}");
         }
         finally
         {

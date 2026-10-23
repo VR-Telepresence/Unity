@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using UnityEngine;
 
 public class SphereStreamDisplay : MonoBehaviour
@@ -141,4 +141,4 @@ public class SphereStreamDisplay : MonoBehaviour
         GUI.Label(new Rect(25, 80, 220, 20), $"Modus: <b>{pmode}</b> [Space]");
         GUI.Label(new Rect(25, 100, 220, 20), $"Payload: {LastReceivedBytes / 1024f:F1} KB");
     }
-}
+}*/
