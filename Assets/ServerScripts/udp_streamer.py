@@ -1,30 +1,28 @@
 import subprocess
 
-video_path = "video.mp4"
-quest_ip = "192.168.178.92"  # Hier die lokale WLAN-IP der Quest 3 eintragen
+quest_ip = "192.168.178.93"
 port = 5000
+video_path = "video.mp4"  # Stelle sicher, dass die Datei im selben Ordner liegt
 
-# Erzeugt den von Quest-GStreamer geforderten RTP/H.264-Stream (pt=96)
 command = [
     'ffmpeg',
     '-stream_loop', '-1',
     '-re',
     '-i', video_path,
-    '-vf', 'scale=1280:720',
+    '-vf', 'scale=1280:720,format=yuv420p',
     '-c:v', 'libx264',
     '-preset', 'ultrafast',
     '-tune', 'zerolatency',
-    '-profile:v', 'high',
-    '-x264-params', 'repeat-headers=1',  # Entspricht GStreamer config-interval=-1
-    '-b:v', '4M',
+    '-profile:v', 'baseline',
+    '-level', '4.0',
+    '-g', '15',
+    '-keyint_min', '15',
+    '-x264-params', 'repeat-headers=1',
+    '-an',
     '-f', 'rtp',
-    '-payload_type', '96',               # Entspricht rtph264pay pt=96
+    '-payload_type', '96',
     f'rtp://{quest_ip}:{port}'
 ]
 
-print(f"Sende H.264 RTP/UDP-Stream an {quest_ip}:{port}...")
-
-try:
-    subprocess.run(command)
-except KeyboardInterrupt:
-    print("\nStream beendet.")
+print(f"Starte Stream an {quest_ip}:{port}...")
+subprocess.run(command)
