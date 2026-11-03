@@ -8,8 +8,9 @@ using UnityEngine;
 public class WebSocketClient : MonoBehaviour
 {
     [Header("Server Konfiguration")]
-    [Tooltip("Die IP-Adresse des Rechners, auf dem der Python-Pose-Server läuft")]
     public string serverUrl = "ws://192.168.178.XX:8765";
+
+    public event Action<byte[]> OnBinaryMessageReceived;
 
     private ClientWebSocket ws;
     private CancellationTokenSource cts;
@@ -33,10 +34,37 @@ public class WebSocketClient : MonoBehaviour
         {
             await ws.ConnectAsync(new Uri(serverUrl), cts.Token);
             Debug.Log($"[WebSocketClient] Verbunden mit {serverUrl}");
+            _ = ReceiveLoop();
         }
         catch (Exception ex)
         {
             Debug.LogWarning($"[WebSocketClient] Verbindung fehlgeschlagen: {ex.Message}");
+        }
+    }
+
+    private async Task ReceiveLoop()
+    {
+        byte[] buffer = new byte[1024 * 1024 * 4];
+
+        while (IsConnected)
+        {
+            try
+            {
+                var result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
+
+                if (result.MessageType == WebSocketMessageType.Binary)
+                {
+                    byte[] data = new byte[result.Count];
+                    Array.Copy(buffer, data, result.Count);
+                    OnBinaryMessageReceived?.Invoke(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ws != null && ws.State != WebSocketState.Aborted)
+                    Debug.LogWarning($"[WebSocketClient] Empfangsfehler: {ex.Message}");
+                break;
+            }
         }
     }
 
