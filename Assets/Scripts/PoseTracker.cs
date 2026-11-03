@@ -42,9 +42,6 @@ public class PoseTracker : MonoBehaviour
     {
         if (hmdCamera == null && Camera.main != null)
             hmdCamera = Camera.main.transform;
-
-        if (networkClient == null)
-            networkClient = GetComponent<WebSocketClient>();
     }
 
     void Update()
