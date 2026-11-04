@@ -14,12 +14,11 @@ public class HeadPosePayload
 
 public class PoseTracker : MonoBehaviour
 {
-    [Header("Referenzen")]
+    [Header("References")]
     [SerializeField] private Transform hmdCamera;
     [SerializeField] private WebSocketClient networkClient;
 
-    [Header("Tracking Parameter")]
-    [Tooltip("Maximaler Bewegungsradius in Metern vor Artefakt-Bildung")]
+    [Header("Tracking Parameters")]
     [SerializeField] private float maxRadius = 0.20f;
     [Range(15, 90)]
     [SerializeField] private float sendRateHz = 60f;
@@ -96,7 +95,7 @@ public class PoseTracker : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"[PoseTracker] Sendefehler: {ex.Message}");
+            Debug.LogWarning($"[PoseTracker] Sending error: {ex.Message}");
         }
         finally
         {

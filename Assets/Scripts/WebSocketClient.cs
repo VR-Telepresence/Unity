@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class WebSocketClient : MonoBehaviour
 {
-    [Header("Server Konfiguration")]
+    [Header("Server Configuration")]
     public string serverUrl = "ws://127.0.0.1:8765";
 
     public event Action<byte[]> OnBinaryMessageReceived;
@@ -33,12 +33,12 @@ public class WebSocketClient : MonoBehaviour
         try
         {
             await ws.ConnectAsync(new Uri(serverUrl), cts.Token);
-            Debug.Log($"[WebSocketClient] Verbunden mit {serverUrl}");
+            Debug.Log($"[WebSocketClient] Connected to {serverUrl}");
             _ = ReceiveLoop();
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"[WebSocketClient] Verbindung fehlgeschlagen: {ex.Message}");
+            Debug.LogWarning($"[WebSocketClient] Connection failed: {ex.Message}");
         }
     }
 
@@ -62,7 +62,7 @@ public class WebSocketClient : MonoBehaviour
             catch (Exception ex)
             {
                 if (ws != null && ws.State != WebSocketState.Aborted)
-                    Debug.LogWarning($"[WebSocketClient] Empfangsfehler: {ex.Message}");
+                    Debug.LogWarning($"[WebSocketClient] Reception error: {ex.Message}");
                 break;
             }
         }
@@ -79,7 +79,7 @@ public class WebSocketClient : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"[WebSocketClient] Sende-Unterbrechung: {ex.Message}");
+            Debug.LogWarning($"[WebSocketClient] Sending error: {ex.Message}");
         }
     }
 

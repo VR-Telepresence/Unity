@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class VideoStreamDisplay : MonoBehaviour
+public class StreamDisplay : MonoBehaviour
 {
     [SerializeField] private WebSocketClient networkClient;
     [SerializeField] private MeshRenderer targetRenderer;
