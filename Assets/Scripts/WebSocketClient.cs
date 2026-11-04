@@ -8,7 +8,7 @@ using UnityEngine;
 public class WebSocketClient : MonoBehaviour
 {
     [Header("Server Konfiguration")]
-    public string serverUrl = "ws://192.168.178.XX:8765";
+    public string serverUrl = "ws://127.0.0.1:8765";
 
     public event Action<byte[]> OnBinaryMessageReceived;
 
