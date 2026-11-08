@@ -32,6 +32,9 @@ public class PoseTracker : MonoBehaviour
     public float LastSentYaw { get; private set; }
     public float LastSentPitch { get; private set; }
 
+    public Vector3 HmdOrigin => hmdOrigin;   // add
+    public bool HasOrigin => isOriginSet;    // add
+
     void Awake()
     {
         sendInterval = 1f / sendRateHz;
@@ -78,7 +81,7 @@ public class PoseTracker : MonoBehaviour
             Vector3 clamped = Vector3.ClampMagnitude(offset, maxRadius);
 
             LastSentYaw = hmdCamera.eulerAngles.y;
-            LastSentPitch = hmdCamera.eulerAngles.x;
+            LastSentPitch = -Mathf.DeltaAngle(0f, hmdCamera.eulerAngles.x);
 
             HeadPosePayload payload = new HeadPosePayload
             {
