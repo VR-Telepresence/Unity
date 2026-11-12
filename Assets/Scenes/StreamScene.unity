@@ -811,8 +811,6 @@ GameObject:
   - component: {fileID: 1771184216}
   - component: {fileID: 1771184215}
   - component: {fileID: 1771184214}
-  - component: {fileID: 1771184218}
-  - component: {fileID: 1771184219}
   - component: {fileID: 1771184220}
   m_Layer: 0
   m_Name: StreamPlane
@@ -915,33 +913,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: -90}
---- !u!114 &1771184218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1771184213}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4a0028bc2537d4c8e5aa60ea4ab47c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  networkClient: {fileID: 1771184219}
-  targetRenderer: {fileID: 1771184215}
---- !u!114 &1771184219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1771184213}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 711ced6d21d5b7a4e9e8a9b9bbbca779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WebSocketClient
-  serverUrl: ws://127.0.0.1:8766
 --- !u!114 &1771184220
 MonoBehaviour:
   m_ObjectHideFlags: 0
