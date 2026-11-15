@@ -24,6 +24,7 @@ public class PoseTracker : MonoBehaviour
     [SerializeField] private float sendRateHz = 60f;
 
     private Vector3 hmdOrigin;
+    private Quaternion originRotation = Quaternion.identity;
     private bool isOriginSet = false;
     private float sendInterval;
     private float timer = 0f;
@@ -58,6 +59,9 @@ public class PoseTracker : MonoBehaviour
         if (hmdCamera != null)
         {
             hmdOrigin = hmdCamera.position;
+            Vector3 euler = hmdCamera.eulerAngles;
+            originRotation = Quaternion.Euler(0f, euler.y, 0f);
+
             isOriginSet = true;
         }
     }
@@ -74,8 +78,10 @@ public class PoseTracker : MonoBehaviour
             if (!isOriginSet)
                 Recenter();
 
-            Vector3 offset = hmdCamera.position - hmdOrigin;
-            Vector3 clamped = Vector3.ClampMagnitude(offset, maxRadius);
+            Vector3 worldOffset = hmdCamera.position - hmdOrigin;
+            Vector3 localOffset = Quaternion.Inverse(originRotation) * worldOffset;
+
+            Vector3 clamped = Vector3.ClampMagnitude(localOffset, maxRadius);
 
             LastSentYaw = hmdCamera.eulerAngles.y;
             LastSentPitch = hmdCamera.eulerAngles.x;
@@ -89,6 +95,8 @@ public class PoseTracker : MonoBehaviour
                 pitch = LastSentPitch,
                 t = (DateTime.UtcNow - DateTime.UnixEpoch).TotalMilliseconds
             };
+
+            // Debug.Log($"[PoseTracker] Sending pose: {JsonUtility.ToJson(payload)}");
 
             string json = JsonUtility.ToJson(payload);
             await networkClient.SendTextAsync(json);
