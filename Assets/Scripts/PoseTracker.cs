@@ -96,7 +96,7 @@ public class PoseTracker : MonoBehaviour
                 t = (DateTime.UtcNow - DateTime.UnixEpoch).TotalMilliseconds
             };
 
-            // Debug.Log($"[PoseTracker] Sending pose: {JsonUtility.ToJson(payload)}");
+            Debug.Log($"[PoseTracker] x: {payload.x:F5}, z: {payload.z:F5}");
 
             string json = JsonUtility.ToJson(payload);
             await networkClient.SendTextAsync(json);
