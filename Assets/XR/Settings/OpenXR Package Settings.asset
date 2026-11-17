@@ -92,41 +92,41 @@ MonoBehaviour:
   m_Name: Standalone
   m_EditorClassIdentifier: Unity.XR.OpenXR::UnityEngine.XR.OpenXR.OpenXRSettings
   features:
-  - {fileID: 8863737770620574798}
-  - {fileID: -5725968372883382908}
-  - {fileID: 5571638905547542237}
-  - {fileID: 1803692172418743296}
-  - {fileID: -3936397824068502912}
+  - {fileID: 4989188577519965033}
   - {fileID: -1867232709348214509}
-  - {fileID: -2327337839896944175}
-  - {fileID: -4656713433847613598}
-  - {fileID: -4467066890695794447}
-  - {fileID: 5830928681625907708}
-  - {fileID: -241608421771861766}
-  - {fileID: -295717870762058699}
-  - {fileID: 1706634393118065608}
   - {fileID: 1916302772348784693}
-  - {fileID: 4065282455123222517}
-  - {fileID: 7730299675940179202}
-  - {fileID: 1496896891693295379}
+  - {fileID: 5571638905547542237}
   - {fileID: -1208607054724238806}
-  - {fileID: -2549253837118472536}
-  - {fileID: -4380111254444555613}
-  - {fileID: 2173358038663125650}
   - {fileID: 3171973376714954536}
-  - {fileID: 2179559329697437250}
-  - {fileID: -4216951690192808775}
+  - {fileID: -241608421771861766}
+  - {fileID: 1496896891693295379}
+  - {fileID: -295717870762058699}
+  - {fileID: 1803692172418743296}
+  - {fileID: 5830928681625907708}
+  - {fileID: -2549253837118472536}
+  - {fileID: -3936397824068502912}
+  - {fileID: -4380111254444555613}
+  - {fileID: 1706634393118065608}
+  - {fileID: 544112122702550251}
+  - {fileID: -7141569822888077117}
+  - {fileID: -7117965995646299932}
   - {fileID: -1591280032715258401}
   - {fileID: -3985336082295589087}
-  - {fileID: 544112122702550251}
-  - {fileID: 3607304101626179390}
-  - {fileID: -7117965995646299932}
-  - {fileID: -7141569822888077117}
-  - {fileID: 4989188577519965033}
-  - {fileID: -6767567649531687544}
-  - {fileID: -5903684380531722955}
   - {fileID: -7250090595186855772}
+  - {fileID: 3607304101626179390}
   - {fileID: -689860220793126108}
+  - {fileID: -6767567649531687544}
+  - {fileID: 2179559329697437250}
+  - {fileID: -4216951690192808775}
+  - {fileID: -5903684380531722955}
+  - {fileID: -4656713433847613598}
+  - {fileID: 4065282455123222517}
+  - {fileID: -5725968372883382908}
+  - {fileID: -2327337839896944175}
+  - {fileID: -4467066890695794447}
+  - {fileID: 8863737770620574798}
+  - {fileID: 2173358038663125650}
+  - {fileID: 7730299675940179202}
   customLoaderName: 
   m_renderMode: 1
   m_latencyOptimization: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9b8cd1fcf8499eb57f194da9698fcd, type: 3}
   m_Name: AROcclusionFeature Standalone
   m_EditorClassIdentifier: Unity.XR.MetaOpenXR::UnityEngine.XR.OpenXR.Features.Meta.AROcclusionFeature
-  m_enabled: 1
+  m_enabled: 0
   nameUi: 'Meta Quest: Occlusion'
   version: 0.1.0
   featureIdInternal: com.unity.openxr.feature.arfoundation-meta-occlusion
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5019471fb2174e5c852ecd4047163007, type: 3}
   m_Name: HandInteractionProfile Standalone
   m_EditorClassIdentifier: Unity.XR.OpenXR::UnityEngine.XR.OpenXR.Features.Interactions.HandInteractionProfile
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Hand Interaction Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handinteraction
