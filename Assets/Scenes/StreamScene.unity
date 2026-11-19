@@ -812,6 +812,7 @@ GameObject:
   - component: {fileID: 1771184215}
   - component: {fileID: 1771184214}
   - component: {fileID: 1771184220}
+  - component: {fileID: 1771184221}
   m_Layer: 0
   m_Name: StreamPlane
   m_TagString: Untagged
@@ -930,6 +931,34 @@ MonoBehaviour:
   _targetRenderer: {fileID: 1771184215}
   _targetMaterialProperty: _BaseMap
   _resources: {fileID: 11400000, guid: f449ebbe2051c2e4d993eaa773a410de, type: 2}
+--- !u!114 &1771184221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771184213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5273e4646b87d05408ef777bf4a5e273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SegmentationReceiver
+  serverUrl: ws://127.0.0.1:8767
+  reconnectDelay: 2
+  mode: 0
+  toggleKey: 98
+  surface: {fileID: 0}
+  surfaceSize: {x: 1, y: 1}
+  surfaceOffset: 0.002
+  flipX: 0
+  flipY: 0
+  lineWidth: 0.01
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  boxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lineMaterial: {fileID: 0}
+  minConfidence: 0
+  onlyLabel: 
+  hideAfterSeconds: 0.5
 --- !u!1 &1805957309
 GameObject:
   m_ObjectHideFlags: 0
