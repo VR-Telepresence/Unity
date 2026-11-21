@@ -531,8 +531,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PoseTracker
   hmdCamera: {fileID: 330585546}
   networkClient: {fileID: 543207063}
-  maxRadius: 0.2
+  maxRadius: 0.08
   sendRateHz: 45
+  invertX: 0
+  invertY: 0
+  invertZ: 0
+  logSentPose: 1
 --- !u!4 &543207065
 Transform:
   m_ObjectHideFlags: 0
@@ -948,7 +952,7 @@ MonoBehaviour:
   mode: 0
   toggleKey: 98
   surface: {fileID: 0}
-  surfaceSize: {x: 1, y: 1}
+  surfaceType: 0
   surfaceOffset: 0.002
   flipX: 0
   flipY: 0
@@ -1008,11 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8479fa0d468cea4db75a3ef28bfd978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurvedScreenGenerator
-  fovHorizontal: 100
-  fovVertical: 80
-  radius: 1.5
-  segmentsX: 24
-  segmentsY: 16
 --- !u!114 &1805957312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,6 +1097,10 @@ MonoBehaviour:
   networkClient: {fileID: 1805957316}
   maxRadius: 0.2
   sendRateHz: 45
+  invertX: 0
+  invertY: 0
+  invertZ: 0
+  logSentPose: 0
 --- !u!114 &1805957316
 MonoBehaviour:
   m_ObjectHideFlags: 0
