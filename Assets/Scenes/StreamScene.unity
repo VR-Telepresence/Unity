@@ -945,20 +945,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SegmentationReceiver
   serverUrl: ws://127.0.0.1:8767
   reconnectDelay: 2
-  mode: 0
+  mode: -1
   toggleKey: 98
   surface: {fileID: 0}
-  surfaceSize: {x: 1, y: 1}
+  surfaceType: 0
   surfaceOffset: 0.002
   flipX: 0
   flipY: 0
-  lineWidth: 0.01
+  lineWidth: 0.05
   outlineColor: {r: 0, g: 1, b: 0, a: 1}
   boxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  fillColor: {r: 0, g: 1, b: 0, a: 0.35}
+  fillResolution: 384
   lineMaterial: {fileID: 0}
+  fillMaterial: {fileID: 0}
   minConfidence: 0
   onlyLabel: 
-  hideAfterSeconds: 0.5
+  hideAfterSeconds: 2
 --- !u!1 &1805957309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,11 +1011,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8479fa0d468cea4db75a3ef28bfd978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurvedScreenGenerator
-  fovHorizontal: 100
-  fovVertical: 80
-  radius: 1.5
-  segmentsX: 24
-  segmentsY: 16
 --- !u!114 &1805957312
 MonoBehaviour:
   m_ObjectHideFlags: 0
