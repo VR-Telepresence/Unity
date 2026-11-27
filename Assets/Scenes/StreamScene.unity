@@ -533,10 +533,6 @@ MonoBehaviour:
   networkClient: {fileID: 543207063}
   maxRadius: 0.08
   sendRateHz: 45
-  invertX: 0
-  invertY: 0
-  invertZ: 0
-  logSentPose: 1
 --- !u!4 &543207065
 Transform:
   m_ObjectHideFlags: 0
@@ -958,7 +954,7 @@ MonoBehaviour:
   flipY: 0
   lineWidth: 0.05
   outlineColor: {r: 0, g: 1, b: 0, a: 1}
-  boxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  boxColor: {r: 0.35054588, g: 1, b: 0, a: 1}
   fillColor: {r: 0, g: 1, b: 0, a: 0.35}
   fillResolution: 384
   lineMaterial: {fileID: 0}
@@ -1100,10 +1096,6 @@ MonoBehaviour:
   networkClient: {fileID: 1805957316}
   maxRadius: 0.2
   sendRateHz: 45
-  invertX: 0
-  invertY: 0
-  invertZ: 0
-  logSentPose: 0
 --- !u!114 &1805957316
 MonoBehaviour:
   m_ObjectHideFlags: 0
